@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: dev
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          time-zone: GMT+8
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+#logging:
+#  path: .
+#  file: log.log
+
+server:
+  port: 8600
+
+websocketServer:
+  port: 9094
+
+alarmServer:
+  port: 2012
+  heartbeatTimeout: 50000
