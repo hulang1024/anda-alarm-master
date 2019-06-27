@@ -30,8 +30,8 @@ public class WebSocketServer {
     private ChannelQuery channelQuery;
     @Value("${websocketServer.port}")
     private int port;
-    @Value("${websocketServer.host}")
-    private String host;
+    @Value("${websocketServer.hostname}")
+    private String hostname;
 
     private Logger logger = LoggerFactory.getLogger(WebSocketServer.class);
 
@@ -39,7 +39,7 @@ public class WebSocketServer {
         if (isRunning)
             return;
         Configuration config = new Configuration();
-        config.setHostname(host);
+        config.setHostname(hostname);
         config.setPort(port);
         socketIOServer = new SocketIOServer(config);
         socketIOServer.addEventListener("stateQuery", String.class, new StateQueryListener(this));
