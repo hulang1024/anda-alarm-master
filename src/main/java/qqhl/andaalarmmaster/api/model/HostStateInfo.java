@@ -9,6 +9,7 @@ import lombok.Data;
 public class HostStateInfo {
     @ApiModelProperty(value="电话ID")
     private String hostId;
+
     @ApiModelProperty(value="在线状态")
     private boolean online;
     @ApiModelProperty(value="设备状态，1=布防中，2=撤防中")
