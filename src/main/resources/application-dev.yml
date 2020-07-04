@@ -1,10 +1,16 @@
 spring:
   profiles: dev
   datasource:
-    url: jdbc:mysql://192.168.1.188:3306/wearable_device_db?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useOldAliasMetadataBehavior=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://172.21.9.4:3306/xql_platform_db?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useOldAliasMetadataBehavior=true&serverTimezone=GMT%2B8
     username: backup
     password: a
     driverClassName: com.mysql.cj.jdbc.Driver
 
 websocketServer:
   hostname: 127.0.0.1
+
+aliSms:
+  url: http://gw.api.taobao.com/router/rest
+  appKey: 
+  secret: 
+  freeSignName: 

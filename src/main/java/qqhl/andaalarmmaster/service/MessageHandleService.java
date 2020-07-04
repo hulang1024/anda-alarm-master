@@ -38,11 +38,13 @@ public class MessageHandleService {
     private AlarmNoticePhoneRepo alarmNoticePhoneRepo;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private SendSmsService sendSmsService;
 
     public void handleMessage(Message message) {
         AndaAlarmMasterApplication.webSocketServer.sendMessageToClients(message);
 
-        if (!(message instanceof HostEventMessage || message instanceof IdleStateEventMessage)) {
+        if (!(message instanceof HostEventMessage/* || message instanceof IdleStateEventMessage 暂不处理离线*/)) {
             return;
         }
         boolean isSaveRecord = false; //是否保存数据库记录
@@ -84,7 +86,7 @@ public class MessageHandleService {
             }
         } else if (message instanceof IdleStateEventMessage) {
             isSaveRecord = true;
-            isNoticable = true;
+            isNoticable = false;
             eventType = 1000;
             eventTime = new Date();
         }
@@ -143,7 +145,7 @@ public class MessageHandleService {
             params.put("name", StringUtils.defaultIfEmpty(user.getRealName(), "未知"));
             params.put("phone", StringUtils.defaultIfEmpty(host.getTelNumber(), ""));
             params.put("address", StringUtils.defaultIfEmpty(user.getAddress(), "未知"));
-            SendSms.send(phones.stream().collect(Collectors.toSet()), "SMS_157355424", params);
+            sendSmsService.send(phones.stream().collect(Collectors.toSet()), "SMS_157355424", params);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -14,8 +14,7 @@ public class UserDao {
     private EntityManager entityManager;
 
     public UserInfo findById(String id) {
-        Query query = entityManager.createNativeQuery(
-            "select real_name, address, (select org_id from org_device where org_device.device_code=user.device_code) org_id from user where id=?");
+        Query query = entityManager.createNativeQuery("select real_name, address, (select org_id from org_device where org_device.device_code=user.device_code) org_id from user where id=?");
         query.setParameter(1, id);
         List ret = query.getResultList();
         if (!ret.isEmpty()) {
